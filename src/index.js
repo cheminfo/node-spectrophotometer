@@ -42,7 +42,7 @@ export default class SpectroPhotometer {
         });
     }
     getHelp() {
-        return this._send('h');
+        return this.send('h');
     }
 
 }

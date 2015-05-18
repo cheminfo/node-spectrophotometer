@@ -1,6 +1,6 @@
 {
   "name": "cheminfo-spectrophotometer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Control your spectrophotometer with JavaScript",
   "main": "lib/index.js",
   "scripts": {
