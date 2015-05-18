@@ -1,0 +1,27 @@
+{
+  "name": "cheminfo-spectro",
+  "version": "0.0.1",
+  "description": "Control your spectrophotometer with JavaScript",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/node-spectrophotometer.git"
+  },
+  "author": "Michaël Zasso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo/node-spectrophotometer/issues"
+  },
+  "homepage": "https://github.com/cheminfo/node-spectrophotometer#readme",
+  "dependencies": {
+    "serialport": "~1.7.1"
+  },
+  "devDependencies": {
+    "babel": "^5.4.3"
+  }
+}
