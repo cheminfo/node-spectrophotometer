@@ -10,3 +10,5 @@ sp._open.catch(function(e){console.log(e)});
 
 sp.send('s').then(log);
 sp.getHelp().then(log);
+sp.run().then(log);
+sp.test().then(log);

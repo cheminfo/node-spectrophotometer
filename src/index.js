@@ -1,36 +1,27 @@
 'use strict';
 
-import {SerialPort} from 'serialport';
+import {SerialPort, parsers} from 'serialport';
 
 export default class SpectroPhotometer {
+
     constructor(port) {
-        this._messages = [];
-        this._currentMessage = '';
         this._resolvers = [];
         this._open = new Promise((resolve, reject) => {
             this._sp = new SerialPort(port, {
-                baudrate: 115200
+                baudrate: 115200,
+                parser: parsers.readline('\r\n\r\n', 'ascii')
             }, err => {
                 if (err)
                     return reject(err);
                 this._sp.on('data', data => {
-                    data = data.toString('ascii').split('\r\n\r\n');
-                    this._currentMessage += data[0];
-                    for (let i = 1; i < data.length; i++) {
-                        this._messages.push(this._currentMessage);
-                        this._currentMessage = data[i];
+                    var resolver = this._resolvers.shift();
+                    if (resolver) {
+                        resolver(data);
                     }
-                    this._resolveData();
                 });
                 resolve();
             });
         });
-    }
-    _resolveData() {
-        while (this._messages.length) {
-            let message = this._messages.shift();
-            this._resolvers.shift()(message);
-        }
     }
 
     send(command) {
@@ -43,6 +34,12 @@ export default class SpectroPhotometer {
     }
     getHelp() {
         return this.send('h');
+    }
+    run() {
+        return this.send('r');
+    }
+    test() {
+        return this.send('t');
     }
 
 }
